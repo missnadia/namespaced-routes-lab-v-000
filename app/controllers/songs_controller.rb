@@ -6,9 +6,13 @@ class SongsController < ApplicationController
         redirect_to artists_path, alert: "Artist not found"
       else
         @songs = @artist.songs
+      elsif @preferences && preferences.song_sort_order
+        @songs = @artist.songs.order(title: @preferences.song_sort_order)
       end
     else
       @songs = Song.all
+    elsif @preferences && @preferences.song_sort_order
+      @songs = Song.order(title: @preferences.song_sort_order)
     end
   end
 
@@ -67,4 +71,3 @@ class SongsController < ApplicationController
     params.require(:song).permit(:title, :artist_name)
   end
 end
-
