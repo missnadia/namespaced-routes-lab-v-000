@@ -7,6 +7,4 @@ class Admin::PreferencesController < ApplicationController
       allow_create_songs: true
     )
   end
-
-
 end
